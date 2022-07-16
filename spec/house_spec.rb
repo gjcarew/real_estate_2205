@@ -63,14 +63,29 @@ RSpec.describe 'Iteration 4' do
   end
 
   it 'can calculate price per square foot' do
+    @house.add_room(@room_1)
+    @house.add_room(@room_2)
+    @house.add_room(@room_3)
+    @house.add_room(@room_4)
+
     expect(@house.price_per_square_foot).to eq(210.53)
   end
 
-  xit 'can sort rooms by area' do
+  it 'can sort rooms by area' do
+    @house.add_room(@room_1)
+    @house.add_room(@room_2)
+    @house.add_room(@room_3)
+    @house.add_room(@room_4)
+
     expect(@house.rooms_sorted_by_area).to eq([@room_4, @room_3, @room_2, @room_1])
   end
 
-  xit 'can return rooms by category hash'
-    expect(@house.rooms_by_category).to eq({:bedroom=>[@room_1, @room2], :living_room=>[@room_3], :basement=>[@room_4]})
+  it 'can return rooms by category hash' do
+    @house.add_room(@room_1)
+    @house.add_room(@room_2)
+    @house.add_room(@room_3)
+    @house.add_room(@room_4)
+
+    expect(@house.rooms_by_category).to eq({:bedroom=>[@room_1, @room_2], :living_room=>[@room_3], :basement=>[@room_4]})
   end
 end

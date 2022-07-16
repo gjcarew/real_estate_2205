@@ -31,6 +31,21 @@ class House
     {"price" => @price, "address" => @address}
   end
 
+  def price_per_square_foot
+    (@price / area.to_f).round(2)
+  end
 
+  def rooms_sorted_by_area
+    @rooms.sort_by{|room| -room.area}
+  end
+
+  def rooms_by_category
+    cats = @rooms.map{|room| room.category}.uniq
+    rbc_hash = Hash.new()
+    cats.each do |cat|
+      rbc_hash[cat] = rooms_from_category(cat)
+    end
+    rbc_hash
+  end
 
 end
