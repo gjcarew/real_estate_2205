@@ -5,6 +5,10 @@ RSpec.describe 'Iteration 4' do
 
   before :each do
     @house = House.new("$400000", "123 sugar lane")
+    room_1 = Room.new(:bedroom, 10, '13')
+    room_2 = Room.new(:bedroom, 11, '15')
+    room_3 = Room.new(:living_room, 25, '15')
+    room_4 = Room.new(:basement, 30, '41')
   end
 
   it 'exists' do
@@ -24,13 +28,37 @@ RSpec.describe 'Iteration 4' do
   end
 
   it 'can add rooms' do
-    room_1 = Room.new(:bedroom, 10, '13')
-    room_2 = Room.new(:bedroom, 11, '15')
 
-    @house.add_room(room_1)
-    @house.add_room(room_2)
+    @house.add_room(@room_1)
+    @house.add_room(@room_2)
 
-    expect(@house.rooms).to eq([room_1, room_2])
-
+    expect(@house.rooms).to eq([@room_1, @room_2])
   end
+@
+  it 'can tell if a house is above market average' do
+    expect(@house.above_market_average?).to be(false)
+  end
+
+  it 'can filter rooms by category' do
+    @house.add_room(@room_1)
+    @house.add_room(@room_2)
+    @house.add_room(@room_3)
+    @house.add_room(@room_4)
+
+    expect(@house.rooms_from_category(:bedroom)).to eq([@room_1, @room_2])
+    expect(@house.rooms_from_category(:basement)).to eq([@room_4])
+  end
+
+  it 'can calculate whole house area' do
+    @house.add_room(@room_1)
+    @house.add_room(@room_2)
+    @house.add_room(@room_3)
+    @house.add_room(@room_4)
+
+    expect(@house.area).to eq(1900)
+  end
+
+  it 'can return details (hash of attributes)' do
+    expect(@house.details).to eq({"price" => 400000, "address" => "123 sugar lane"})
+
 end
