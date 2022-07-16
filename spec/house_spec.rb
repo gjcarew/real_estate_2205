@@ -5,10 +5,10 @@ RSpec.describe 'Iteration 4' do
 
   before :each do
     @house = House.new("$400000", "123 sugar lane")
-    room_1 = Room.new(:bedroom, 10, '13')
-    room_2 = Room.new(:bedroom, 11, '15')
-    room_3 = Room.new(:living_room, 25, '15')
-    room_4 = Room.new(:basement, 30, '41')
+    @room_1 = Room.new(:bedroom, 10, '13')
+    @room_2 = Room.new(:bedroom, 11, '15')
+    @room_3 = Room.new(:living_room, 25, '15')
+    @room_4 = Room.new(:basement, 30, '41')
   end
 
   it 'exists' do
@@ -34,7 +34,7 @@ RSpec.describe 'Iteration 4' do
 
     expect(@house.rooms).to eq([@room_1, @room_2])
   end
-@
+
   it 'can tell if a house is above market average' do
     expect(@house.above_market_average?).to be(false)
   end
@@ -60,5 +60,6 @@ RSpec.describe 'Iteration 4' do
 
   it 'can return details (hash of attributes)' do
     expect(@house.details).to eq({"price" => 400000, "address" => "123 sugar lane"})
+  end
 
 end
